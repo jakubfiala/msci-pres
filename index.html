@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>~</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+
+<body>
+	<div id="container">
+		<div id="video"></div>
+		<div class="frik-slide vertical">
+			<h1>~</h1>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>What I have done:</h1>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>Deep Learning Composition Toolkit</h1>
+			<p>
+				Adapted the python RNN to learn from WAV data, approximates sine wave
+			</p>
+			<p>
+				Audio segmentation learning in node (MFCC)
+			</p>
+			<p>
+				Testing convnets &mdash; to be able to generate signals from semantic representations
+			</p>
+			<p>
+				Reduce feature space by learning the spectrum
+			</p>
+			<p>
+				^ failed, convnets still need much more CPU power and low learning rates
+			</p>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>Collaborative Coding framework</h1>
+			<p>
+				Sorted out script execution &mdash; reloading entire iframe, not just the DOM
+			</p>
+			<p>
+				Canvas rendering, Web Audio working
+			</p>
+			<p>
+				requestAnimationFrame validation loop
+			</p>
+			<p>
+				WebHint = HTMLHint + CSSLint + JSHint = kind of works
+			</p>
+			<p>
+				Sexy UI, Ace editor /w code highlighting
+			</p>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>TO DO</h1>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>Deep Learning</h1>
+			<p>
+				Successfully train a convnet on spectra, classify with SVM/softmax
+			</p>
+			<p>
+				Find a way to extract semantic representations (as in Mahendran, 2014 || Dosovitskiy, 2015 || Simonyan, 2014)
+			</p>
+			<p>
+				Train the RNN on classes learned by the convnet
+			</p>
+			<p>
+				&hellip;
+			</p>
+			<p>
+				PROFIT!!!
+			</p>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>Collab Coding</h1>
+			<p>
+				Sort out error detection (it's there, it's just wrapped badly)
+			</p>
+			<p>
+				See if WebGL works
+			</p>
+			<p>
+				Think about defaults &mdash; e.g. autoinclude Three.js/Maximilian
+			</p>
+			<p>
+				Experiment with more restricted AV-focused environment (massive canvas/GL context, HTML-free)
+			</p>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>Venues</h1>
+		</div>
+		<div class="frik-slide vertical">
+			<h1>Deep Learning Composition</h1>
+			<p>
+				ICMC 2016 (Utrecht)
+			</p>
+			<p>
+				NIME?
+			</p>
+			<h1>Collab Coding</h1>
+			<p>
+				International Journal of Performance Arts and Digital Media
+			</p>
+			<p>
+				International Live Coding Conference 16? Is it happening?
+			</p>
+		</div>
+		<div class="frik-slide vertical">
+			~
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var slides = [];
+	var pos = 0;
+
+	$(".frik-slide.vertical").each(function(i) {
+		if (!i) {
+			slides.push({
+				el: $(this),
+				position: 1
+			});
+			$(this).css("top","0");
+		}
+		else {
+			slides.push({
+				el: $(this),
+				position: 0
+			});
+			$(this).css("top","110vh");
+		}
+
+	})
+
+	var paused = false;
+	var looping = false;
+
+	var loop = {
+		end: 100
+	};
+
+	var tag = document.createElement('script');
+
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	var player;
+	function onYouTubeIframeAPIReady() {
+		player = new YT.Player('video', {
+			height: $(window).height(),
+			width: $(window).width(),
+			playerVars: {
+				'autoplay': 1,
+				'disablekb': 1,
+				'controls': 0,
+				'showinfo': 0,
+				'modestbranding': 1
+			},
+			videoId: 'DgPaCWJL7XI',
+			events: {
+				'onReady': function() {
+					$('#video').css('opacity',1);
+					player.setVolume(0);
+					setInterval(function(){
+						if (player.getCurrentTime() >= loop.end) {
+							player.pauseVideo();
+							player.seekTo(20);
+							player.playVideo();
+						}
+					},50);
+				}
+			}
+		});
+	}
+
+	document.onkeydown = function(event) {
+
+		if (event.keyCode == 38) {	//up
+			slides[pos].position = 0;
+			slides[pos].el.css("top","110vh");
+			if (pos > 0) pos--;
+		}
+		if (event.keyCode == 40) {	//down
+			slides[pos].position = 2;
+			slides[pos].el.css("top","-110vh");
+			if (pos <= slides.length-1) {
+				pos++;
+			}
+			else {
+				setTimeout(function() {
+					location.href= "http://www.blank.org";
+				},1000);
+			}
+		}
+
+		slides[pos].position = 1;
+		slides[pos].el.css("top","0px");
+	}
+
+</script>
+
+</html>

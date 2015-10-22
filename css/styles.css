@@ -1,0 +1,201 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
+}
+
+body {
+	font-family: 'Helvetica';
+	font-weight: bold;
+	color: white;
+	background: black;
+	overflow: hidden;
+}
+
+#container {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+#video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	opacity: 0;
+	transition: opacity 3s;
+	-webkit-transition: opacity 3s;
+}
+
+.vid-main {
+	display: auto;
+	z-index: 1;
+}
+
+.vid-loop {
+	z-index: 2;
+	transition: none;
+	-webkit-transition: none;
+}
+
+img.gallery {
+	max-height: 70vh;
+}
+
+img.gallery.enlarge {
+	min-width: 30vw;
+}
+
+
+.frik-slide {
+	position: absolute;
+	width: 100vw;
+	height: 100%;
+	text-align: center;
+	z-index: 3;
+	text-shadow: 0px 0px 1.5em black;
+	top: 0;
+	left: 0;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	pointer-events: none;
+	background-color: rgba(0,0,0,0.7);
+}
+
+.frik-slide.loader {
+	z-index: -1;
+}
+
+.frik-slide.loader img {
+	width: 5vw;
+}
+
+.frik-slide.fade {
+	transition: opacity 0.7s ease-out;
+	-webkit-transition: opacity 0.7s ease-out;
+	opacity: 0;
+}
+
+.frik-slide.vertical {
+	transition: top 0.7s ease-out;
+	-webkit-transition: top 0.7s ease-out;
+}
+
+.frik-slide.horizontal {
+	transition: left 0.7s ease-out;
+	-webkit-transition: left 0.7s ease-out;
+}
+
+.frik-slide.link h1:hover {
+	cursor: pointer;
+}
+
+h1 {
+	font-size: 3em;
+	pointer-events: auto;
+	margin-bottom: 1em
+}
+
+p {
+	font-size: 1.5em;
+	pointer-events: auto;
+	margin-bottom: 1em
+}
+
+#hint {
+	position: fixed;
+	z-index: 3;
+	top: 0.5em;
+	width: 100%;
+	opacity: 0;
+	font-size: 2em;
+	transition: opacity 0.7s ease-out;
+	-webkit-transition: opacity 0.7s ease-out;
+	text-align: center;
+	text-shadow: 0px 0px 1.5em black;
+}
+
+span.continue.left {
+	position: relative;
+	left: 0;
+	transition: left 0.4s ease-out;
+	-webkit-transition: left 0.4s ease-out;
+}
+
+.frik-slide h1:hover span.continue.left, .frik-slide .plink:hover span.continue.left {
+	left: 0.7ex;
+}
+
+.frik-nav.horizontal {
+	position: absolute;
+	top: 47vh;
+	width: 100vw;
+	z-index: 5;
+}
+
+.frik-nav-button {
+	height: 6vh;
+	font-size: 5vh;
+	margin: 1em;
+	cursor: pointer;
+	position: relative;
+	transition: opacity 0.2s ease-in;
+	-webkit-transition: opacity 0.2s ease-in;
+}
+.frik-nav-button:hover {
+	opacity: 0.7;
+}
+
+.frik-nav-button.left {
+	float: left;
+	display: none;
+}
+
+.frik-nav-button.right {
+	float: right;
+}
+
+p.plink {
+	cursor: pointer;
+}
+
+.frik-exit {
+	position: fixed;
+	z-index: 100;
+	font-size: 1.5em;
+	cursor: pointer;
+	text-shadow: 0px 0px 1.5em black;
+	top: 0.3em;
+	right: 0.3em;
+	opacity: 0;
+	transition: text-shadow 0.2s ease-in, opacity 0.4s ease-in;
+	-webkit-transition: text-shadow 0.2s ease-in, opacity 0.4s ease-in;
+}
+
+.frik-exit:hover {
+	text-shadow: 0px 0px 2em white;
+}
+
+.frik-exit span {
+	position: relative;
+	top: -0.05em;
+}
